@@ -1,0 +1,88 @@
+#!/usr/bin/perl -T -CSDAL
+
+use warnings;
+use strict;
+use utf8;
+use IServ::Conf;
+use IServ::IO;
+
+my $m_ip = qr/\d{1,3}(?:\.\d{1,3}){3}/;
+undef %ENV;
+$ENV{PATH} = "/sbin:/bin:/usr/sbin:/usr/bin";
+
+chdir "/var/lib/iserv/config/ts-shares" or die "Couldn't change directory: $!";
+
+my $cfg = "[global]\n".
+"  logon home = \\\\%N\\all_home\\%u\\Files\n";
+
+if ($conf->{RoamingProfiles})
+{
+  $cfg .= "  logon path = \\\\%N\\all_home_other\\%u\\Windows\\Local\n";
+} else {
+  $cfg .= "  logon path = \n";
+}
+
+my $share_cfg = "  browseable = no\n".
+"  comment = Alle Heimatverzeichnisse\n".
+"  path = /home\n".
+"  writeable = yes\n\n".
+"  create mask = 0664\n".
+"  force create mode = 0664\n".
+"  directory mask = 02775\n".
+"  force directory mode = 02775\n\n".
+"  hide unreadable = Yes\n".
+"  hide unwriteable files = Yes\n".
+"  hide dot files = no\n".
+"  hide files = /desktop.ini/\$RECYCLE.BIN/\n".
+"  csc policy = disable\n\n";
+
+$cfg .= "\n[ts]\n".
+"  copy = netlogon\n\n".
+"[all_home]\n".
+"  root preexec = /usr/lib/iserv/samba_ts_exec login all_home %U %R %i %I %a %d\n".
+"  root postexec = /usr/lib/iserv/samba_ts_exec logout all_home %U %R %i %I %a %d\n".
+$share_cfg.
+"# create same share a second time for other using (Group folder, Windows profile)\n".
+"# to prevent multiple \"Windows-Login erfolgreich\" logs.\n".
+"[all_home_other]\n".
+"  root preexec = /usr/lib/iserv/samba_rds_exec login all_home_other %U %R %i %I %a %d\n".
+"  root postexec = /usr/lib/iserv/samba_rds_exec logout all_home_other %U %R %i %I %a %d\n".
+$share_cfg;
+
+my @ips = @{$conf->{TerminalServerIPs}};
+my %del = map {($_, 1)} glob "*";
+delete $del{'0.0.0.0'};
+my %reload;
+
+foreach my $ip (@ips)
+{
+  delete $del{$ip} if defined $del{$ip};
+  unless (-f $ip and getfile $ip eq $cfg)
+  {
+    putfile $ip, $cfg;
+    $reload{$ip} = 1;
+  }
+}
+
+for (grep -f $_, keys %del)
+{
+  # Truncate, but don't unlink the config file here.
+  # A cronjob will take care of these 0 byte files later.
+  open my $fh, '>', $_ or warn $!;
+  close $fh;
+  $reload{$_} = 1;
+}
+
+if (%reload)
+{
+  system qw(smbcontrol smbd reload-config);
+  sleep 1;
+
+  open FP, "-|", "/usr/bin/smbstatus", "-p" or die $!;
+  while (<FP>)
+  {
+    my ($pid, $ip) = /^\s*(\d{1,7})\s.*\s\((?:ipv4:)?($m_ip)(?::\d{1,5})?\)\s/ or next;
+    kill 15, $pid if $reload{$ip};
+  }
+  close FP;
+}

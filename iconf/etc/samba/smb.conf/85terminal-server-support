@@ -1,0 +1,3 @@
+# Include settings for terminal servers
+[global]
+   include = /var/lib/iserv/config/ts-shares/%I

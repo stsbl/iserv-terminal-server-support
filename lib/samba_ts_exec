@@ -1,0 +1,46 @@
+#!/usr/bin/perl -CSDAL
+
+use warnings;
+use strict;
+use POSIX;
+
+my $m_ip = qr/[0-9a-f.:]{1,64}/;
+my $m_pid = qr/\d{1,7}/;
+
+my $time = strftime '%F %T', localtime;
+my $args = join " ", @ARGV;
+
+die "$time samba_ts_exec: usage: samba_exec mode share act protocol server_addr ".
+  "client_addr client_agent pid (got $args)\n" unless @ARGV == 8;
+
+my ($mode, $share, $act, $protocol, $server_addr,
+  $client_addr, $client_agent, $pid) = @ARGV;
+
+$mode =~ /^(login|logout)$/ or
+  die "$time samba_ts_exec: error: invalid mode $mode\n";
+
+my @pw = getpwnam $act or
+  die "$time samba_ts_exec: error: user $act does not exist\n";
+$pw[2] >= 500 or
+  print "$time samba_ts_exec: uid $pw[2] too low, skipping\n" and exit;
+
+$client_addr =~ /^$m_ip$/ or
+  die "$time samba_ts_exec: error: invalid ip $client_addr\n";
+
+# pid may scale up to PID_MAX_LIMIT (4194304)
+$pid =~ /^$m_pid$/ or
+  die "$time samba_ts_exec: error: invalid pid $pid\n";
+
+# run real samba_exec
+system "/usr/lib/iserv/samba_exec", @ARGV;
+
+# taken from real samba_exec
+if ($share eq "all_home")
+{
+  for (glob "/usr/share/iserv/samba/$mode.d/*")
+  {
+    system $_, $act, $client_addr, $pid;
+    my $err = $? >> 8;
+    warn "$time samba_ts_exec: $_ exited with return code $err\n" if $err;
+  }
+}

@@ -1,0 +1,6 @@
+MkDir 0755 root:root /var/lib/iserv/config/ts-shares
+Touch /var/lib/iserv/config/ts-shares/0.0.0.0
+ChPerm 0644 root:root /var/lib/iserv/config/ts-shares/0.0.0.0
+
+Shell "update config for terminal servers" "/usr/lib/iserv/samba_ts_cfg"
+

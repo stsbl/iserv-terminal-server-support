@@ -1,0 +1,5 @@
+debian/stsbl-iserv-terminal-server-support/*
+debian/stsbl-iserv-terminal-server-support.substvars
+debian/stsbl-iserv-terminal-server-support.debhelper.log
+debian/files
+debian/debhelper-build-stamp

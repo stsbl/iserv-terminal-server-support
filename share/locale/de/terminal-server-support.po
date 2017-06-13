@@ -1,0 +1,8 @@
+msgid "Terminal Server IPs"
+msgstr "Terminalserver-IPs"
+
+msgid "Enter a list of IPs of Windows (Server) devices which should use the Home and Group Shares for Terminal Servers.\nOne IP per line."
+msgstr "Geben Sie eine Liste von IPs von Windows (Server)-Geräten ein, welche die Home- und Gruppenfreigaben für Terminalserver nutzten sollen.\nEine IP pro Zeile."#
+
+msgid "Module: Terminal Server Support"
+msgstr "Modul: Terminalserver-Support"
