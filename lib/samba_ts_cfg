@@ -30,8 +30,8 @@ my $share_cfg = "  browseable = no\n".
 "  force create mode = 0664\n".
 "  directory mask = 02775\n".
 "  force directory mode = 02775\n\n".
-"  hide unreadable = Yes\n".
-"  hide unwriteable files = Yes\n".
+"  hide unreadable = yes\n".
+"  hide unwriteable files = yes\n".
 "  hide dot files = no\n".
 "  hide files = /desktop.ini/\$RECYCLE.BIN/\n".
 "  csc policy = disable\n\n";
