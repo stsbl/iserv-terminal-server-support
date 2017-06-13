@@ -1,4 +1,4 @@
-stsbl-iserv-terminal-server-support (17.06.16-1) experimental; urgency=medium
+stsbl-iserv-terminal-server-support (17.06.13-1) experimental; urgency=medium
 
    [ Felix Jacobi ]
    * Added package tags.
