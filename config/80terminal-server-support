@@ -1,0 +1,6 @@
+TerminalServerIPs:
+name            Terminal Server IPs
+description     Enter a list of IPs of Windows (Server) devices which should use the Home and Group Shares for Terminal Servers.\nOne IP per line.
+group           Module: Terminal Server Support
+type            array
+default         ()
