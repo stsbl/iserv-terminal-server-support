@@ -8,8 +8,8 @@ Standards-Version: 3.9.5
 Package: stsbl-iserv-terminal-server-support
 Architecture: all
 Depends: iserv-portal, stsbl-iserv-samba-local-session-log
-Description: Terminalserver-Unterstützung für IServ
+Description: Terminalserver-Unterstützung für IServ (EXPERIMENTELL)
  Dieses Modul bietet verbesserte Unterstützung für Terminalserver im Dateiserver (Samba) und umgeht das Problem, das in zwei parallelen Terminalserver-Sitzungen im Laufwerk H: nicht zwei Dateien mit dem selben Namen geöffnet werden können.
  .
  Für die Einrichtung müssen in iservcfg > Modul: Terminalserver-Unterstützung > Terminalserver-IPs die IP-Adressen der Geräte, die als Terminalserver agieren, eingetragen werden.
-Tag: suite::iserv:portal, role::plugin
+Tag: suite::iserv:portal, role::plugin, implemented-in::perl, status::highlighted, status::experimental
