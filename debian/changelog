@@ -1,3 +1,10 @@
+stsbl-iserv-terminal-server-support (17.06.16-1) experimental; urgency=medium
+
+   [ Felix Jacobi ]
+   * Added package tags.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Wed, 14 Jun 2017 00:04:47 +0200
+
 stsbl-iserv-terminal-server-support (17.06.13-0) unstable; urgency=low
 
   * Initial Release.
