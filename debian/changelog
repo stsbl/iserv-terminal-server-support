@@ -1,3 +1,12 @@
+stsbl-iserv-terminal-server-support (17.06.14-0) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * samba_ts_cfg: Fixed samba_ts_exec path.
+  * samba_ts_cfg: Warn on invalid ip from iservcfg.
+  * Updated control file to include module homepage.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Wed, 14 Jun 2017 16:14:00 +0200
+
 stsbl-iserv-terminal-server-support (17.06.13-1) experimental; urgency=medium
 
    [ Felix Jacobi ]
