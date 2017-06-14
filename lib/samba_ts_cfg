@@ -45,8 +45,8 @@ $share_cfg.
 "# create same share a second time for other using (Group folder, Windows profile)\n".
 "# to prevent multiple \"Windows-Login erfolgreich\" logs.\n".
 "[all_home_other]\n".
-"  root preexec = /usr/lib/iserv/samba_rds_exec login all_home_other %U %R %i %I %a %d\n".
-"  root postexec = /usr/lib/iserv/samba_rds_exec logout all_home_other %U %R %i %I %a %d\n".
+"  root preexec = /usr/lib/iserv/samba_ts_exec login all_home_other %U %R %i %I %a %d\n".
+"  root postexec = /usr/lib/iserv/samba_ts_exec logout all_home_other %U %R %i %I %a %d\n".
 $share_cfg;
 
 my @ips = @{$conf->{TerminalServerIPs}};
