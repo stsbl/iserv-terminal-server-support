@@ -56,6 +56,11 @@ my %reload;
 
 foreach my $ip (@ips)
 {
+  unless ($ip =~ $m_ip)
+  {
+    warn "Invalid ip \"$ip\"!\n" and next;
+  }
+
   delete $del{$ip} if defined $del{$ip};
   unless (-f $ip and getfile $ip eq $cfg)
   {
