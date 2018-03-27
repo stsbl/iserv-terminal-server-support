@@ -2,13 +2,18 @@ Source: stsbl-iserv-terminal-server-support
 Section: misc
 Priority: extra
 Maintainer: Stadtteilschule Blankenese <repository@stsbl.de>
-Build-Depends: debhelper (>= 10), iserv3-dev
-Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 10)
+Build-Depends-Indep: iserv3-dev
+Standards-Version: 4.1.3.0
 Homepage: https://it.stsbl.de/documentation/mods/stsbl-iserv-terminal-server-support
 
 Package: stsbl-iserv-terminal-server-support
 Architecture: all
-Depends: iserv-portal, stsbl-iserv-samba-local-session-log
+Depends: ${misc:Depends},
+  ${perl:Depends},
+  iserv-portal,
+  stsbl-iserv-samba-local-session-log,
+Xb-Private-IServ-Revision: ${iserv:Revision}
 Description: Terminalserver-Unterstützung für IServ (EXPERIMENTELL)
  Dieses Modul bietet verbesserte Unterstützung für Terminalserver im Dateiserver (Samba) und umgeht das Problem, 
  das in zwei parallelen Terminalserver-Sitzungen im Laufwerk H: nicht zwei Dateien mit dem selben Namen geöffnet 
