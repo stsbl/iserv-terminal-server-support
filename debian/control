@@ -12,6 +12,7 @@ Architecture: all
 Depends: ${misc:Depends},
   ${perl:Depends},
   iserv-portal,
+  libpath-tiny-perl,
   stsbl-iserv-samba-local-session-log,
 Xb-Private-IServ-Revision: ${iserv:Revision}
 Description: Terminalserver-Unterstützung für IServ (EXPERIMENTELL)
