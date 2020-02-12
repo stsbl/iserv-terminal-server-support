@@ -62,9 +62,10 @@ foreach my $ip (@ips)
   }
 
   delete $del{$ip} if defined $del{$ip};
-  unless (-f $ip and getfile $ip eq $cfg)
+  my $path = path($ip);
+  unless (-f $ip and $path->slurp_utf8 eq $cfg)
   {
-    path($ip)->spew_utf8($cfg);
+    $path->spew_utf8($cfg);
     $reload{$ip} = 1;
   }
 }
