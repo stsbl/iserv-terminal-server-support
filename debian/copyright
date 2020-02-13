@@ -2,12 +2,11 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: stsbl-iserv-terminal-server-support
 
 Files: *
-Copyright: <years> <put author's name and email here>
-           <years> <likewise for another author>
+Copyright: 2020 Felix Jacobi <Felix@jacobi-hamburg.net>
 License: MIT
 
 Files: debian/*
-Copyright: 2019 Stadtteilschule Blankenese <repository@stsbl.de>
+Copyright: 2020 Stadtteilschule Blankenese <repository@stsbl.de>
 License: MIT
 
 License: MIT
