@@ -1,3 +1,10 @@
+stsbl-iserv-terminal-server-support (20.02.14-1) stable; urgency=medium
+
+  * Updated packaging
+  * Removed IServ::IO
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Fri, 14 Feb 2020 00:56:37 +0100
+
 stsbl-iserv-terminal-server-support (17.06.14-0) experimental; urgency=medium
 
   [ Felix Jacobi ]
