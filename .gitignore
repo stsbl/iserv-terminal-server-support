@@ -3,3 +3,7 @@ debian/stsbl-iserv-terminal-server-support.substvars
 debian/stsbl-iserv-terminal-server-support.debhelper.log
 debian/files
 debian/debhelper-build-stamp
+/Makefile.iservmake
+/locale
+/system-locale
+!/locale/templates/*_misc.pot
